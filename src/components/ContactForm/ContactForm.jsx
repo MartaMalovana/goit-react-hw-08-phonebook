@@ -1,6 +1,8 @@
 import React, {useState} from "react";
+import { connect } from 'react-redux';
+import actions from '../../redux/app/app-actions';
 
-export default function ContactForm ({contactArr, formSubmit}) {
+function ContactForm ({contactArr, formSubmit}) {
 
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
@@ -14,7 +16,7 @@ export default function ContactForm ({contactArr, formSubmit}) {
       
       contactArr.find(contact => contact.name.toLowerCase() === event.currentTarget.value.toLowerCase()) &&
       alert(`${event.currentTarget.value} is already in contacts!`);
-      };
+    };
      
     const handleChangeNumber = (event) => {
          setNumber(event.currentTarget.value);
@@ -25,6 +27,7 @@ export default function ContactForm ({contactArr, formSubmit}) {
       formSubmit({newName: name, newNumber: number});
       setName('');
       setNumber('');
+      console.log(555);
     }
     
     return (<form onSubmit={handleSubmit}>
@@ -65,3 +68,16 @@ export default function ContactForm ({contactArr, formSubmit}) {
   
 }
 
+const mapStateToProps = state => {
+  return {
+    contactArr: state.contacts.items,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    formSubmit: (newName, newNumber) => dispatch(actions.addContact(newName, newNumber)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);

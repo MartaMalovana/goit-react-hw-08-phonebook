@@ -1,7 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
 import PropTypes from 'prop-types';
+import actions from '../../redux/app/app-actions';
 
-export default function Filter ({onChange, filter}) {
+function Filter ({onChange, filter}) {
     
     return (
         <label>
@@ -15,7 +17,7 @@ export default function Filter ({onChange, filter}) {
                 title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
                 required
                 autoComplete="off"
-                onChange={onChange}
+                onChange={(event) => onChange(event.target.value)}
                 value={filter}
             ></input>
         </label>
@@ -26,3 +28,18 @@ Filter.propTypes = {
     onChange: PropTypes.func,
     filter: PropTypes.string
 };
+
+const mapStateToProps = state => {
+    return {
+        filter: state.contacts.filter,
+    };
+  };
+  
+const mapDispatchToProps = dispatch => {
+    return {
+        onChange: (e) => dispatch(actions.handleChange(e)),
+    };
+};
+  
+
+export default connect(mapStateToProps, mapDispatchToProps)(Filter);
