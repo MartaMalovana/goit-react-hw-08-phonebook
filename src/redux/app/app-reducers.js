@@ -5,7 +5,6 @@ import actions from './app-actions';
 
 const items = createReducer([], {
     [actions.addContact]: (state, action) => {
-        console.log(state);
         return [...state, {name: action.payload.newName, number: action.payload.newNumber, key: nanoid()}]
     },
     
@@ -21,5 +20,4 @@ const filter= createReducer('', {
 export default combineReducers({
     items,
     filter,
-}
-)
+});

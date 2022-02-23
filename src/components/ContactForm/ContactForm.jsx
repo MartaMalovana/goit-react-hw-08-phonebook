@@ -1,8 +1,12 @@
 import React, {useState} from "react";
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import actions from '../../redux/app/app-actions';
+import {getContactArr} from '../../redux/contactForm/contactForm-selectors';
 
-function ContactForm ({contactArr, formSubmit}) {
+export default function ContactForm () {
+
+    const contactArr = useSelector(getContactArr);
+    const dispatch = useDispatch();
 
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
@@ -24,10 +28,9 @@ function ContactForm ({contactArr, formSubmit}) {
 
     const handleSubmit = (event) => {
       event.preventDefault();
-      formSubmit({newName: name, newNumber: number});
+      dispatch(actions.addContact({newName: name, newNumber: number}));
       setName('');
       setNumber('');
-      console.log(555);
     }
     
     return (<form onSubmit={handleSubmit}>
@@ -67,17 +70,3 @@ function ContactForm ({contactArr, formSubmit}) {
     );
   
 }
-
-const mapStateToProps = state => {
-  return {
-    contactArr: state.contacts.items,
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    formSubmit: (newName, newNumber) => dispatch(actions.addContact(newName, newNumber)),
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);

@@ -1,0 +1,1 @@
+export const getContactArr = state => state.contacts.items;

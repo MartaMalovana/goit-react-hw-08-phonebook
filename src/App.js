@@ -1,36 +1,15 @@
-import React, {useState, useEffect} from 'react';
-import { connect } from "react-redux";
-// import { nanoid } from 'nanoid';
+import { useSelector } from "react-redux";
 import ContactsList from './components/ContactsList/ContactsList';
 import ContactForm from './components/ContactForm/ContactForm';
 import Filter from './components/Filter/Filter';
+import {getContacts, getFilterContacts} from './redux/app/app-selectors';
 import './App.css';
 
-function App ({contacts, filterContacts}) {
+export default function App () {
+
+  const contacts = useSelector(getContacts);
+  const filterContacts = useSelector(getFilterContacts);
   
-  // const useLocalStorage = (param, defaultValue) => {
-  //   const [state, setState] = useState(() => {
-  //     return JSON.parse(window.localStorage.getItem(param)) ?? defaultValue;
-  //   });
-
-  //   useEffect(() => {
-  //     window.localStorage.setItem(param, JSON.stringify(state));
-  //   }, [param, state]);
-
-  //   return [state, setState];
-  // }
-
-  // const [contacts, setContacts] = useLocalStorage('contacts', []);
-  // const [filterContacts, setFilter] = useLocalStorage('filterContacts', '');
-
-  // const handleChange = event => {
-  //   setFilter(event.currentTarget.value);
-  //  };
-
-  // const addContact = ({newName, newNumber}) => {
-  //     setContacts((prev) => [...prev, {name: newName, number: newNumber, key: nanoid()}]);
-  // };
-
   const getFilteredContacts = () => {
       if(contacts === []) {
         return;
@@ -45,12 +24,6 @@ function App ({contacts, filterContacts}) {
         .includes(filterContacts.toLowerCase()) 
       );
   };
-    
-
-  // const deleteContact = (name) => {
-  //   const newContacts = contacts.filter(contact => contact.name !== name);
-  //   setContacts(newContacts);
-  // }
 
   return (
     <div className="App">
@@ -66,11 +39,3 @@ function App ({contacts, filterContacts}) {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-      contacts: state.contacts.items,
-      filterContacts: state.contacts.filter,
-  };
-};
-
-export default connect(mapStateToProps)(App);
