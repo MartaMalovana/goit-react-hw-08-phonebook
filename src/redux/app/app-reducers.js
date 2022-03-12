@@ -1,23 +1,27 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { combineReducers } from "@reduxjs/toolkit";
-import { nanoid } from 'nanoid';
 import actions from './app-actions';
+import {fetchContacts, addNewContact, deleteContactById} from './app-operations';
 
 const items = createReducer([], {
-    [actions.addContact]: (state, action) => {
-        return [...state, {name: action.payload.newName, number: action.payload.newNumber, key: nanoid()}]
-    },
-    
-    [actions.deleteContact]: (state, action) => [...state.filter(contact => contact.name !== action.payload)],
+    [fetchContacts.fulfilled]: (_, {payload}) => payload,
+    [addNewContact.fulfilled]: (state, {payload}) => [...state, payload],
+    [deleteContactById.fulfilled]: (state, {payload}) => state.filter(el => el.id !== payload.id),
 })
 
-const filter= createReducer('', {
+const filter = createReducer('', {
     [actions.handleChange]: (state, action) => {
         return action.payload;
     },
 });
 
+const loader = createReducer(false, {
+[fetchContacts.pending]: (state, action) => true,
+[fetchContacts.fulfilled]: (state, action) => false,
+})
+
 export default combineReducers({
     items,
     filter,
+    loader,
 });

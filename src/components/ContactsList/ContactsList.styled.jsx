@@ -3,9 +3,12 @@ import styled from '@emotion/styled';
 export const ContactsTitle = styled.h2`
 `;
 
-export const Contact = styled.p`
+export const Contact = styled.div`
+    display: flex;
+    justify-content: space-between;
     text-align: left;
     margin: 0;
+    width: 100%;
 `;
 
 export const Container = styled.div`
@@ -16,6 +19,7 @@ export const Container = styled.div`
 export const ContactContainer = styled.div`
     display: flex;
     align-items: center;
+    margin-bottom: 6px;
 `;
 
 export const Button = styled.button`

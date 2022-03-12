@@ -1,22 +1,16 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import { persistStore, persistReducer, 
+import { persistStore, 
     FLUSH,
     REHYDRATE,
     PAUSE,
     PERSIST,
     PURGE,
     REGISTER } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
 import contactsReducers from './app/app-reducers';
 
-const persistConfig = {
-    key: 'contacts',
-    storage,
-}
-
-const persistedReducer = persistReducer(persistConfig, combineReducers({
+const persistedReducer = combineReducers({
     contacts: contactsReducers,
-}));
+});
 
 export const store = configureStore({
     reducer: persistedReducer,
@@ -29,5 +23,4 @@ export const store = configureStore({
     }),
 });
 
-export const persistor = persistStore(store);
-
+// export const persistor = persistStore(store);
