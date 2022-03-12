@@ -5,7 +5,6 @@ export const ContactsTitle = styled.h2`
 
 export const Contact = styled.div`
     display: flex;
-    justify-content: space-between;
     text-align: left;
     margin: 0;
     width: 100%;

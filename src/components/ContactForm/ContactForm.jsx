@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import { useSelector, useDispatch } from 'react-redux';
-// import actions from '../../redux/app';
 import {addNewContact} from '../../redux/app/app-operations';
 import {getContactArr} from '../../redux/contactForm/contactForm-selectors';
 
