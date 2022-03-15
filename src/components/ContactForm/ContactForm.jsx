@@ -1,5 +1,7 @@
 import React, {useState} from "react";
 import { useSelector, useDispatch } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {addNewContact} from '../../redux/app/app-operations';
 import {getContactArr} from '../../redux/contactForm/contactForm-selectors';
 
@@ -18,8 +20,7 @@ export default function ContactForm () {
         return;
       }
       
-      contactArr.find(contact => contact.name.toLowerCase() === event.currentTarget.value.toLowerCase()) &&
-      alert(`${event.currentTarget.value} is already in contacts!`);
+      
     };
      
     const handleChangeNumber = (event) => {
@@ -28,9 +29,14 @@ export default function ContactForm () {
 
     const handleSubmit = (event) => {
       event.preventDefault();
-      dispatch(addNewContact({name: name, phone: number}));
-      setName('');
-      setNumber('');
+
+      if(contactArr.find(contact => contact.name.toLowerCase() === name.toLowerCase())) {
+        toast(`Ім'я '${name}' вже існує!`);
+        return;
+      }
+        dispatch(addNewContact({name: name, phone: number}));
+        setName('');
+        setNumber('');
     }
     
     return (<form onSubmit={handleSubmit}>
@@ -66,6 +72,7 @@ export default function ContactForm () {
           />
         </label>
         <button id="add-name" type="submit">Add contact</button>
+        <ToastContainer />
       </form>
     );
   

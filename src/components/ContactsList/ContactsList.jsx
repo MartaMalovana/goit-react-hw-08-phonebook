@@ -4,11 +4,17 @@ import {LineWave} from 'react-loader-spinner';
 import PropTypes from 'prop-types';
 import {Contact, Container, ContactContainer, Button} from './ContactsList.styled';
 import {deleteContactById} from '../../redux/app/app-operations';
-import {getLoader} from '../../redux/contactsList/contactsList-selectors';
+import {getLoader, getContacts, getFilter} from '../../redux/contactsList/contactsList-selectors';
 
-export default function ContactsList ({data}) {
+export default function ContactsList () {
     const loader = useSelector(getLoader);
+    const contacts = useSelector(getContacts);
+    const filter = useSelector(getFilter);
     const dispatch = useDispatch();
+
+    const contactList = filter 
+        ? contacts.filter(el => el.name.toLowerCase().includes(filter.toLowerCase())) 
+        : contacts;
 
     return (
         <Container>
@@ -20,7 +26,7 @@ export default function ContactsList ({data}) {
                     ariaLabel="three-circles-rotating"
                 />
             }
-            {data && data.map(contact => {
+            {contacts && contactList.map(contact => {
                 return (
                     <ContactContainer key={contact.id}>
                     <Contact >

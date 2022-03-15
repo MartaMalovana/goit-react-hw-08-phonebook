@@ -16,3 +16,7 @@ export const deleteContactById = createAsyncThunk(actions.deleteContact, async (
     const deletedContact = await deleteContactAPI(id);
     return deletedContact;
 })
+
+export const filteredContacts = createAsyncThunk(actions.handleChange, async (filter) => {
+    return filter;
+})
