@@ -4,7 +4,7 @@ import actions from './app-actions';
 import {fetchContacts, addNewContact, deleteContactById, filteredContacts} from './app-operations';
 
 const items = createReducer([], {
-    [fetchContacts.fulfilled]: (_, {payload}) => payload,
+    [fetchContacts.fulfilled]: (state, {payload}) => payload,
     [addNewContact.fulfilled]: (state, {payload}) => [...state, payload],
     [deleteContactById.fulfilled]: (state, {payload}) => state.filter(el => el.id !== payload.id),
 })
@@ -17,8 +17,8 @@ const filter = createReducer('', {
 });
 
 const loader = createReducer(false, {
-[fetchContacts.pending]: (state, action) => true,
-[fetchContacts.fulfilled]: (state, action) => false,
+// [fetchContacts.pending]: (state, action) => true,
+// [fetchContacts.fulfilled]: (state, action) => false,
 })
 
 export default combineReducers({
