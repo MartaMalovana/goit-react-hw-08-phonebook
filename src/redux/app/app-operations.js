@@ -21,7 +21,7 @@ export const filteredContacts = createAsyncThunk(actions.handleChange, async (fi
     return filter;
 })
 
-export const openModal = createAsyncThunk('contacts/changeContact', async (contact) => {
+export const openModal = createAsyncThunk('contacts/openModal', async (contact) => {
     return contact;
 })
 
@@ -33,3 +33,5 @@ export const changeNumber = createAsyncThunk('contacts/changeNumber', async (num
     return number;
 })
 
+export const closeModal = createAsyncThunk('contacts/closeModal', async () => {
+})

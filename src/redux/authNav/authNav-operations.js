@@ -63,5 +63,11 @@ export const deleteContact = createAsyncThunk('auth/deleteContact', async (conta
 })
 
 export const changeContact = createAsyncThunk('contacts/changeContact', async ({id, name, number}) => {
-    await axios.patch(`/contacts/${id}`, {"name": name, "number": number});
+    try {
+        await axios.patch(`/contacts/${id}`, {"name": name, "number": number});
+        console.log('Changed!');
+    } catch {
+
+    }
+    return ({id, name, number});
 })

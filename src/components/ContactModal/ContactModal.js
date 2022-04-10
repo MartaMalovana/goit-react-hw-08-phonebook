@@ -4,7 +4,7 @@ import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { getModalIsOpen } from '../../redux/app/app-selectors';
 import { getContacts, getContactId, getContactName, getContactNumber } from '../../redux/app/app-selectors';
-import { changeName, changeNumber,  } from '../../redux/app/app-operations';
+import { changeName, changeNumber, closeModal } from '../../redux/app/app-operations';
 import {changeContact} from '../../redux/authNav/authNav-operations';
 
 const customStyles = {
@@ -55,6 +55,10 @@ export default function ContactModal () {
     e.preventDefault();
   };
 
+  const handleCloseModal = () => {
+    dispatch(closeModal());
+  };
+
   return (
     <div>
       {/* <button onClick={openModal}>Open Modal</button> */}
@@ -66,7 +70,7 @@ export default function ContactModal () {
         contentLabel="Example Modal"
       >
         <form onSubmit={handleSubmit}>
-            <button name="close-modal" type="button">X</button>
+            <button name="close-modal" type="button" onClick={handleCloseModal}>X</button>
             <label> 
             <h3 id="title-name">Name</h3>
             <input
