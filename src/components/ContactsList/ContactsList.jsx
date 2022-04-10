@@ -5,9 +5,12 @@ import PropTypes from 'prop-types';
 import {Contact, Container, ContactContainer, Button} from './ContactsList.styled';
 import {deleteContactById} from '../../redux/app/app-operations';
 import {getLoader, getContacts, getFilter} from '../../redux/contactsList/contactsList-selectors';
-import { fetchContacts } from "../../redux/app/app-operations";
+import { fetchContacts, openModal } from "../../redux/app/app-operations";
+import { getUserContacts, deleteContact, changeContact } from "../../redux/authNav/authNav-operations";
+import ContactModal from "../ContactModal/ContactModal";
 
 export default function ContactsList () {
+
     const loader = useSelector(getLoader);
     const contacts = useSelector(getContacts);
     const filter = useSelector(getFilter);
@@ -18,8 +21,10 @@ export default function ContactsList () {
         : contacts;
 
     useEffect(() => {
-        dispatch(fetchContacts());
-    }, []);
+        dispatch(getUserContacts());
+    }, [dispatch]);
+
+
 
     return (
         <Container>
@@ -35,19 +40,28 @@ export default function ContactsList () {
                 return (
                     <ContactContainer key={contact.id}>
                     <Contact >
-                        <div>{contact.name}: {contact.phone}</div>
+                        <div>{contact.name}: {contact.number}</div>
                         <Button 
                             type="button" 
                             name={contact.name} 
-                            onClick={(event) => dispatch(deleteContactById(contact.id))}
+                            onClick={(event) => dispatch(deleteContact(contact.id))}
                         >
                         Delete
+                        </Button>
+                        
+                        <Button 
+                            type="button" 
+                            name={contact.name} 
+                            onClick={(event) => dispatch(openModal(contact))}
+                        >
+                        Change
                         </Button>
                     </Contact>
                     </ContactContainer>
                 );
             })
             }
+            <ContactModal />
         </Container>
     );
 };

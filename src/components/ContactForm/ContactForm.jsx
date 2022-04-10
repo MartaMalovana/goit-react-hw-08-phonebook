@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {addNewContact} from '../../redux/app/app-operations';
+import { addContact } from "../../redux/authNav/authNav-operations";
 import {getContactArr} from '../../redux/contactForm/contactForm-selectors';
 
 export default function ContactForm () {
@@ -34,7 +35,7 @@ export default function ContactForm () {
         toast(`Ім'я '${name}' вже існує!`);
         return;
       }
-        dispatch(addNewContact({name: name, phone: number}));
+        dispatch(addContact({name: name, number: number}));
         setName('');
         setNumber('');
     }

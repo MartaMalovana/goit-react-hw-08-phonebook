@@ -46,3 +46,22 @@ export const fetchCurrentUser = createAsyncThunk('auth/refresh', async (_, thunk
     const {data} = await axios.get('users/current');
     return data;
 })
+
+export const getUserContacts = createAsyncThunk('auth/allContacts', async () => {
+    const {data} = await axios.get('/contacts');
+    return data;
+})
+
+export const addContact = createAsyncThunk('auth/newContact', async (contact) => {
+    const {data} = await axios.post('/contacts', contact);
+    return data;
+})
+
+export const deleteContact = createAsyncThunk('auth/deleteContact', async (contactId) => {
+    await axios.delete(`/contacts/${contactId}`);
+    return contactId;
+})
+
+export const changeContact = createAsyncThunk('contacts/changeContact', async ({id, name, number}) => {
+    await axios.patch(`/contacts/${id}`, {"name": name, "number": number});
+})

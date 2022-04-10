@@ -20,3 +20,16 @@ export const deleteContactById = createAsyncThunk(actions.deleteContact, async (
 export const filteredContacts = createAsyncThunk(actions.handleChange, async (filter) => {
     return filter;
 })
+
+export const openModal = createAsyncThunk('contacts/changeContact', async (contact) => {
+    return contact;
+})
+
+export const changeName = createAsyncThunk('contacts/changeName', async (name) => {
+    return name;
+})
+
+export const changeNumber = createAsyncThunk('contacts/changeNumber', async (number) => {
+    return number;
+})
+
