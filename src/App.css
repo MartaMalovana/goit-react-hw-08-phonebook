@@ -66,9 +66,8 @@ label {
 }
 
 #add-name {
-  width: calc(100% / 4);
+  /* width: calc(100% / 4); */
   min-width: 100px;
-  max-width: 100px;
   height: 30px;
   display: block;
   margin-bottom: 10px;
@@ -94,7 +93,7 @@ label {
 }
 
 form {
-  border: 1.5px solid black;
+  /* border: 1.5px solid black; */
   display: flex;
   flex-direction: column;
   align-items: center;

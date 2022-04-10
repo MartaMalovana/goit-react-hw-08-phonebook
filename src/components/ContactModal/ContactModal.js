@@ -1,11 +1,12 @@
 import ReactModal from 'react-modal';
-import ReactDOM from 'react-dom';
 import React from 'react';
+import { Button } from '@mui/material';
 import { useSelector, useDispatch } from "react-redux";
 import { getModalIsOpen } from '../../redux/app/app-selectors';
-import { getContacts, getContactId, getContactName, getContactNumber } from '../../redux/app/app-selectors';
+import { getContactId, getContactName, getContactNumber } from '../../redux/app/app-selectors';
 import { changeName, changeNumber, closeModal } from '../../redux/app/app-operations';
 import {changeContact} from '../../redux/authNav/authNav-operations';
+import { ButtonClose, Input } from './ContactModal.styled';
 
 const customStyles = {
     overlay: {
@@ -29,18 +30,6 @@ export default function ContactModal () {
     const contactNumber = useSelector(getContactNumber);
     const contactId = useSelector(getContactId);
     const modalIsOpen = useSelector(getModalIsOpen);
-//   function openModal() {
-//     setIsOpen(true);
-//   }
-
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    // subtitle.style.color = '#f00';
-  }
-
-//   function closeModal() {
-//     setIsOpen(false);
-//   }
 
   const handleChangeName = (event) => {
     dispatch(changeName(event.target.value));
@@ -61,19 +50,18 @@ export default function ContactModal () {
 
   return (
     <div>
-      {/* <button onClick={openModal}>Open Modal</button> */}
       <ReactModal
         isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
-        // onRequestClose={closeModal}
         style={customStyles}
         contentLabel="Example Modal"
       >
         <form onSubmit={handleSubmit}>
-            <button name="close-modal" type="button" onClick={handleCloseModal}>X</button>
+            <ButtonClose>
+              <Button variant="text" name="close-modal" type="button" onClick={handleCloseModal} >X</Button>
+            </ButtonClose>
             <label> 
             <h3 id="title-name">Name</h3>
-            <input
+            <Input
                 type="text"
                 name="name"
                 id="name"
@@ -83,12 +71,11 @@ export default function ContactModal () {
                 autoComplete="off"
                 onChange={handleChangeName}
                 value={contactName}
-            >
-            </input>
+            />
             </label>
             <label>
             <h3 id="title-tel">Phone number</h3>
-            <input
+            <Input
                 type="tel"
                 name="number"
                 id="tel"
@@ -100,11 +87,9 @@ export default function ContactModal () {
                 value={contactNumber}
             />
             </label>
-            <button id="add-name" type="submit">Change</button>
+            <Button variant="text" id="add-name" type="submit">Change</Button>
       </form>
       </ReactModal>
-
-
     </div>
   );
 }

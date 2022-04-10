@@ -3,13 +3,14 @@ import { useSelector, useDispatch } from "react-redux";
 import PropTypes from 'prop-types';
 import {filteredContacts} from '../../redux/app/app-operations';
 import {getFilter} from '../../redux/filter/filter-selectors';
+import { FilterForm } from "./Filter.styled";
 
 export default function Filter () {
     const filter = useSelector(getFilter);
     const dispatch = useDispatch();
 
     return (
-        <label>
+        <FilterForm>
             <h3 id="title-filter">Find contact by name</h3>
             <input
                 type="text"
@@ -26,7 +27,7 @@ export default function Filter () {
                 }}
                 value={filter}
             ></input>
-        </label>
+        </FilterForm>
     );
 }
 

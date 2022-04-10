@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {useDispatch} from 'react-redux';
+import Button from '@mui/material/Button';
 import { register } from "../../redux/authNav/authNav-operations";
 import AuthNav from "./AuthNav";
 
@@ -37,19 +38,19 @@ export default function Register () {
         <AuthNav />
         <form name="signup_form" autoComplete="off" onSubmit={handleSubmit}>
             <label>
-                Name
+                <h3>Name</h3>
                 <input type="text" name="name"  value={name} onChange={handleChange}></input>
             </label>
             <label>
-                Email
+                <h3>Email</h3>
                 <input type="email" name="email" value={email} onChange={handleChange}></input>
             </label>
             <label>
-                Password
+                <h3>Password</h3>
                 <input type="password" name="password" value={password} onChange={handleChange}></input>
             </label>
 
-            <button type="submit" onSubmit={handleSubmit}>Submit</button>
+            <Button variant="contained" type="submit" onSubmit={handleSubmit} sx={{marginTop: '20px'}}>Submit</Button>
         </form>
         </>
     );

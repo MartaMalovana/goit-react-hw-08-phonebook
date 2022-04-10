@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {addNewContact} from '../../redux/app/app-operations';
+import { Button } from "@mui/material";
 import { addContact } from "../../redux/authNav/authNav-operations";
 import {getContactArr} from '../../redux/contactForm/contactForm-selectors';
 
@@ -20,8 +20,6 @@ export default function ContactForm () {
       if(contactArr === []) {
         return;
       }
-      
-      
     };
      
     const handleChangeNumber = (event) => {
@@ -40,7 +38,10 @@ export default function ContactForm () {
         setNumber('');
     }
     
-    return (<form onSubmit={handleSubmit}>
+    return (
+      <>
+      <form onSubmit={handleSubmit}>
+        <h2 id="title-phonebook">PHONEBOOK</h2>
         <label> 
           <h3 id="title-name">Name</h3>
           <input
@@ -72,9 +73,10 @@ export default function ContactForm () {
             value={number}
           />
         </label>
-        <button id="add-name" type="submit">Add contact</button>
+        <Button variant="text" id="add-name" type="submit" >Add contact</Button>
         <ToastContainer />
       </form>
+      </>
     );
   
 }

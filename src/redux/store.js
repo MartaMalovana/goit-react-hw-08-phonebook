@@ -16,8 +16,6 @@ const persistConfig = {
   whitelist: ['token'],
 }
 
-// const persistedReducer = combineReducers();
-
 export const store = configureStore({
     reducer: {
       contacts: contactsReducers,

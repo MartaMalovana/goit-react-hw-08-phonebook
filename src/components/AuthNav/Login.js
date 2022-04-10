@@ -1,7 +1,9 @@
 import { useState } from "react";
 import {useDispatch} from 'react-redux';
+import Button from '@mui/material/Button';
 import { login } from "../../redux/authNav/authNav-operations";
 import AuthNav from "./AuthNav";
+import { InputName, InputPassword } from "./Login.styled";
 
 export default function Login () {
     const [email, setEmail] = useState('');
@@ -26,23 +28,23 @@ export default function Login () {
         setEmail('');
         setPassword('');
     }
+
+
     return (
         <>
         <AuthNav />
         <form name="login_form" onSubmit={handleSubmit}>
-            
             <label>
-                Email
-                <input type="email" name="email" value={email} onChange={handleChange}></input>
-            </label>
+                <h3>Email</h3>
+                <InputName type="email" name="email" value={email} onChange={handleChange} />
+            </label> 
             <label>
-                Password
-                <input type="text" name="password" value={password} onChange={handleChange}></input>
-            </label>
-
-            <button type="submit" onSubmit={handleSubmit}>Submit</button>
+                <h3>Password</h3>
+                <InputPassword type="text" name="password" value={password} onChange={handleChange} />
+            </label> 
+            <Button variant="contained" type="submit" onSubmit={handleSubmit} sx={{marginTop: '20px'}}>Submit</Button>
+            {/* <button type="submit" onSubmit={handleSubmit}>Submit</button> */}
         </form>
-
         </>
     );
 }

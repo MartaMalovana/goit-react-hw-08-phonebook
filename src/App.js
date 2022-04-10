@@ -20,7 +20,6 @@ export default function App () {
   
   return (
     <div className="App">
-        {/* <AppBar /> */}
 
         <Switch>
           <Route exact path='/'><AppBar /></Route>

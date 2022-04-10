@@ -2,11 +2,11 @@ import React, {useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {LineWave} from 'react-loader-spinner';
 import PropTypes from 'prop-types';
-import {Contact, Container, ContactContainer, Button} from './ContactsList.styled';
-import {deleteContactById} from '../../redux/app/app-operations';
+import { Button } from "@mui/material";
+import {Contact, Container, ContactContainer} from './ContactsList.styled';
 import {getLoader, getContacts, getFilter} from '../../redux/contactsList/contactsList-selectors';
-import { fetchContacts, openModal } from "../../redux/app/app-operations";
-import { getUserContacts, deleteContact, changeContact } from "../../redux/authNav/authNav-operations";
+import { openModal } from "../../redux/app/app-operations";
+import { getUserContacts, deleteContact } from "../../redux/authNav/authNav-operations";
 import ContactModal from "../ContactModal/ContactModal";
 
 export default function ContactsList () {
@@ -23,8 +23,6 @@ export default function ContactsList () {
     useEffect(() => {
         dispatch(getUserContacts());
     }, [dispatch]);
-
-
 
     return (
         <Container>

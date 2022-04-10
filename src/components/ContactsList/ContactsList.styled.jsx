@@ -6,6 +6,7 @@ export const ContactsTitle = styled.h2`
 export const Contact = styled.div`
     display: flex;
     text-align: left;
+    align-items: center;
     margin: 0;
     width: 100%;
 `;

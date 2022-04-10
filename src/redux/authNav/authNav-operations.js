@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios"; 
+import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
@@ -65,7 +66,7 @@ export const deleteContact = createAsyncThunk('auth/deleteContact', async (conta
 export const changeContact = createAsyncThunk('contacts/changeContact', async ({id, name, number}) => {
     try {
         await axios.patch(`/contacts/${id}`, {"name": name, "number": number});
-        console.log('Changed!');
+        toast('Changed!');
     } catch {
 
     }

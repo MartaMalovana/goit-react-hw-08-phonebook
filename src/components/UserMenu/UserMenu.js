@@ -1,6 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
+import Button from '@mui/material/Button';
 import {getUserEmail} from '../../redux/authNav/authNav-selectors';
 import { logout } from "../../redux/authNav/authNav-operations";
+import {UserBar} from './UserMenu.styled';
 
 export default function UserMenu () {
 
@@ -12,9 +14,9 @@ export default function UserMenu () {
     }
 
     return (
-        <>
-        <h5>Hello {userEmail}</h5>
-        <button type="button" onClick={handleSubmit}>Logout</button>
-        </>
+        <UserBar>
+            <h4>{userEmail}</h4>
+            <Button variant="text" type="button" onClick={handleSubmit}>Logout</Button>
+        </UserBar>
     );
 }
